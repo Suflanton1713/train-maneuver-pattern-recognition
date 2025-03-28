@@ -32,19 +32,26 @@ package object ManiobrasTrenes {
     */
 
 
-    def mover(n:Int, c:Int, ps:Tren, ss:Tren, nomueve:Tren): (Tren,Tren,Tren) = {
-      if(n>0 && n!=c){
+    def mover(n:Int, ps:Tren, ss:Tren): (Tren,Tren) = {
+      if(n>0){
         ps match{
-          case Nil => (ps,ss,nomueve)
-          case x::xs=> mover(n,c+1,ps.init, (ps.last)::ss, nomueve)
+          case Nil => (ps,ss)
+          case x::Nil => (Nil, x :: ss)
+          case x::xs=> ps.splitAt(math.max(0, ps.length - n)) match {
+            case (left,right) => (left, right ++ ss)          }
+            //(ps take (ps.length - n), (ps takeRight n)++ss )
         }
-      }else if(n<0 && n!=c){
+      }else if(n<0){
         ss match {
-          case Nil => (ps,ss,nomueve)
-          case x :: xs => mover(n, c - 1, ps ++ List(ss.head), ss.tail, nomueve)
+          case Nil => (ps,ss)
+          case x::Nil => (ps:::List(x),Nil)
+          case x :: xs => ss.splitAt(-1*n) match{
+            case (left,right) => (ps++left, right)
+          }
+
         }
       }else{
-        (ps,ss,nomueve)
+        (ps,ss)
       }
     }
 
@@ -53,25 +60,35 @@ package object ManiobrasTrenes {
       case Uno(x) => x match {
         case 0  => e
         case x => 
-          val resultado = mover(x,0,e._1,e._2, e._3);
-          (resultado._1, resultado._2,resultado._3)
+          val resultado = mover(x, e._1,e._2);
+          (resultado._1, resultado._2,e._3)
 
       }
 
       case Dos(x) => x match{
         case 0 => e
         case x =>
-          val resultado = mover(x,0,e._1,e._3, e._2);
-          (resultado._1, resultado._3,resultado._2)
+          val resultado = mover(x, e._1,e._3);
+          (resultado._1, e._2,resultado._2)
     }
+      case _ => e
     }
 
   }
-/*
+
   def aplicarMovimientos(e: Estado, movs: Maniobra): List[Estado] = {
-    // Implementación aquí
+    movs match{
+      case Nil => List(e)
+      case x::Nil => e :: List(aplicarMovimiento(e,x))
+      case x::xs => e :: aplicarMovimientos(aplicarMovimiento(e,x),xs)
+      case _ => List(e)
+      /* Se podría añadirle un case que revise que x es un movimiento válido (Uno(m), Dos(m)) en caso de no serlo
+      no ejecutar el movimiento, es decir no hacer, e::aplicarMOvimientos(...), sin embargo,
+      hasta ahora si algo así ocurre lo que pasaría es que repetiría el estado
+       */
+    }
   }
-
+  /*
   def definirManiobra(t1: Tren, t2: Tren): Maniobra = {
     // Dados dos trenes t1 (el original) y t2 (el deseado), devuelve la maniobra que se necesita hacer
     // para pasar una estación de maniobras del estado (t1, List(), List()) al estado (t2, List(), List()).
