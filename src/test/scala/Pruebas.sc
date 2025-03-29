@@ -39,4 +39,8 @@ val esperado = List(
 assert(resultado == esperado)  // Esto debería funcionar
 
 
+
+definirManiobra(List("c","b","a","d"), List("b","c","d","a"))
+
+aplicarMovimientos((List("c","b","a","d"),Nil,Nil), List(Uno(3), Dos(1), Uno(-3), Dos(-1)))
 println("Todas las pruebas pasaron correctamente.")
