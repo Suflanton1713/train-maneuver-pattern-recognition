@@ -33,16 +33,16 @@ package object ManiobrasTrenes {
       }
     }
     m match {
-      case Uno(x) => x match {
+      case Uno(n) => n match {
         case 0 => e
-        case x =>
-          val resultado = mover(x, e._1, e._2);
+        case n =>
+          val resultado = mover(n, e._1, e._2);
           (resultado._1, resultado._2, e._3)
       }
-      case Dos(x) => x match {
+      case Dos(n) => n match {
         case 0 => e
-        case x =>
-          val resultado = mover(x, e._1, e._3);
+        case n =>
+          val resultado = mover(n, e._1, e._3);
           (resultado._1, e._2, resultado._2)
       }
       case _ => e
