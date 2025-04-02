@@ -16,7 +16,6 @@ package object ManiobrasTrenes {
       if (n > 0) {
         ps match {
           case Nil => (ps, ss)
-          case x :: Nil => (Nil, x :: ss)
           case x :: xs => ps.splitAt(math.max(0, ps.length - n)) match {
             case (left, right) => (left, right ++ ss)
           }
@@ -24,7 +23,6 @@ package object ManiobrasTrenes {
       } else if (n < 0) {
         ss match {
           case Nil => (ps, ss)
-          case x :: Nil => (ps ::: List(x), Nil)
           case x :: xs => ss.splitAt(-1 * n) match {
             case (left, right) => (ps ++ left, right)
           }
