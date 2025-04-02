@@ -71,13 +71,13 @@ package object ManiobrasTrenes {
             case `vagon_buscado` => maniobrar(t1.tail, t2.tail, m)
             case _ =>
               val maniobras = List(
-                Uno(t1.length - t1.indexOf(t2.head)),
-                Dos(t1.indexOf(t2.head)),
-                Uno(-1 * (t1.length - t1.indexOf(t2.head))),
-                Dos(-1 * t1.indexOf(t2.head))
+                Uno(t1.length - t1.indexOf(vagon_buscado)),
+                Dos(t1.indexOf(vagon_buscado)),
+                Uno(-1 * (t1.length - t1.indexOf(vagon_buscado))),
+                Dos(-1 * t1.indexOf(vagon_buscado))
               )
               val nuevoEstado = aplicarMovimientos((t1, Nil, Nil), maniobras)
-              maniobrar(nuevoEstado.last.head.tail, t2.tail, m ++ maniobras)
+              maniobrar((nuevoEstado.last)._1.tail, t2.tail, m ++ maniobras)
           }
       }
     }
