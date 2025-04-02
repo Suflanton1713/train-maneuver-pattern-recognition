@@ -17,14 +17,14 @@ package object ManiobrasTrenes {
         ps match {
           case Nil => (ps, ss)
           case x :: xs => ps.splitAt(math.max(0, ps.length - n)) match {
-            case (left, right) => (left, right ++ ss)
+            case (left, right) => (left, right ::: ss)
           }
         }
       } else if (n < 0) {
         ss match {
           case Nil => (ps, ss)
           case x :: xs => ss.splitAt(-1 * n) match {
-            case (left, right) => (ps ++ left, right)
+            case (left, right) => (ps ::: left, right)
           }
 
         }
@@ -74,7 +74,7 @@ package object ManiobrasTrenes {
                 Dos(-1 * t1.indexOf(vagon_buscado))
               )
               val nuevoEstado = aplicarMovimientos((t1, Nil, Nil), maniobras)
-              maniobrar((nuevoEstado.last)._1.tail, t2.tail, m ++ maniobras)
+              maniobrar((nuevoEstado.last)._1.tail, t2.tail, m ::: maniobras)
           }
       }
     }

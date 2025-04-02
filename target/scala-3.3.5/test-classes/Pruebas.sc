@@ -1,4 +1,5 @@
 import ManiobrasTrenes._
+
 val e1 = (List('a', 'b', 'c', 'd'), Nil, Nil)
 val e2= aplicarMovimiento(e1, Uno(2))
 val e3 = aplicarMovimiento(e2, Dos(3))
