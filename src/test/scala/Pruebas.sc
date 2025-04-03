@@ -1,59 +1,35 @@
 import ManiobrasTrenes._
 
-val e1 = (List('a', 'b', 'c', 'd'), Nil, Nil)
-val e2= aplicarMovimiento(e1, Uno(2))
+val e1 = (List('A', 'B', 'C', 'D', 'E', 'F'), Nil, Nil)
+
+val e2 = aplicarMovimiento(e1, Uno(3))
 val e3 = aplicarMovimiento(e2, Dos(3))
-val e4 = aplicarMovimiento(e3, Dos(-1))
-val e5 = aplicarMovimiento(e4, Uno(-2))
+val e4 = aplicarMovimiento(e3, Dos(-2))
+val e5 = aplicarMovimiento(e4, Uno(-3))
+val e6 = aplicarMovimiento(e5, Uno(15))
+val e7 = aplicarMovimiento(e6, Uno(-100))
+val e8 = aplicarMovimiento(e7, Dos(23))
+val e9 = aplicarMovimiento(e8, Dos(-17))
+val e10 = aplicarMovimiento(e9, Uno(6))
+val e11 = aplicarMovimiento(e10, Uno(-6))
+val e12 = aplicarMovimiento(e11, Uno(0))
+val e13 = aplicarMovimiento(e12, Dos(0))
 
-aplicarMovimientos(e1, List(Uno(2), Dos(3), Dos(-1), Uno(-2), Dos(-1)))
-val e = (List('a', 'b'), List('c'), List('d'))
-aplicarMovimientos(e, List(Uno(1), Dos(1), Uno(-2)))
-definirManiobra(List('a', 'b', 'c', 'd'), List('d', 'b', 'c', 'a'))
+aplicarMovimientos(e1, List(Uno(2), Dos(3), Dos(-1), Uno(-2)))
+aplicarMovimientos(e1, List(Uno(6), Uno(-6), Dos(6), Dos(-6)))
+aplicarMovimientos(e1, List(Uno(10), Uno(-20), Dos(12), Dos(-17)))
+aplicarMovimientos((List('X', 'Y', 'Z'), Nil, Nil), List(Uno(-2), Dos(1)))
+aplicarMovimientos((List(5, 6, 7), Nil, Nil), List(Dos(-1), Uno(1)))
+aplicarMovimientos((List(5, 6, 7), Nil, Nil), List(Uno(0), Dos(-50)))
+aplicarMovimientos((List(5, 6, 7), List(5, 6, 7), List('X', 'Y', 'Z')), List(Uno(1), Dos(2)))
+aplicarMovimientos((List('+', '-','*'), List(5, 6, 7), List('X', 'Y', 'Z')), List(Uno(1), Dos(3), Dos(-1)))
 
-
-//val e1 = (List('A', 'B', 'C', 'D'), Nil, Nil)
-//
-//// Prueba 1: Mover dos vagones a la segunda lista
-//val e2 = aplicarMovimiento(e1, Uno(2))
-//assert(e2 == (List('A', 'B'), List('C', 'D'), Nil), s"Error en Prueba 1: $e2")
-//
-////Prueba 2: Mover un vagón de la segunda lista de vuelta a la primera
-//val e3 = aplicarMovimiento(e2, Uno(-1))
-//assert(e3 == (List('A', 'B','C' ), List('D'), Nil), s"Error en Prueba 2: $e3")
-//
-//// Prueba 3: Mover un vagón de la primera lista a la tercera lista
-//val e4 = aplicarMovimiento(e3, Dos(1))
-//assert(e4 == (List('A', 'B'), List('D'), List('C')), s"Error en Prueba 3: $e4")
-//
-//// Prueba 4: Intentar mover 0 vagones (debe mantenerse igual)
-//val e5 = aplicarMovimiento(e4, Uno(0))
-//assert(e5 == e4, s"Error en Prueba 4: $e5")
-//
-//
-//// Prueba 5: Intentar mover más vagones de los que hay disponibles en la primera lista
-//val e6 = aplicarMovimiento(e5, Uno(5))
-//assert(e6 == (Nil, List('A', 'B', 'D'), List('C')), s"Error en Prueba 5: $e6")
-//
-//// Prueba 6: Intentar mover un vagón de la tercera lista de vuelta a la primera
-//val e7 = aplicarMovimiento(e6, Dos(-1))
-//assert(e7 == (List('C'), List('A', 'B', 'D'), Nil), s"Error en Prueba 6: $e7")
-//
-//
-//val emov = (List('a', 'b'), List('c'), List('d'))
-//val resultado = aplicarMovimientos(emov, List(Uno(1), Dos(1), Uno(-2)))
-//
-//val esperado = List(
-//  (List('a', 'b'), List('c'), List('d')),
-//  (List('a'), List('b', 'c'), List('d')),
-//  (List(), List('b', 'c'), List('a', 'd')),
-//  (List('b', 'c'), List(), List('a', 'd'))
-//)
-//assert(resultado == esperado)  // Esto debería funcionar
-//
-//
-//
-//definirManiobra(List("c","b","a","d"), List("b","c","d","a"))
-//
-//aplicarMovimientos((List("c","b","a","d"),Nil,Nil), List(Uno(3), Dos(1), Uno(-3), Dos(-1)))
-//println("Todas las pruebas pasaron correctamente.")
+definirManiobra(List('A', 'B', 'C', 'D'), List('D', 'B', 'C', 'A'))
+definirManiobra(List('x', 'y', 'z'), List('y', 'z', 'x'))
+definirManiobra(List('a', 'b', 'c'), List('a', 'b', 'c'))
+definirManiobra(List('+', '-', '*'), List('+', '*', '-'))
+definirManiobra(List('A', 'B', 'C'), List('C', 'B', 'A'))
+definirManiobra(List('A', 'B', 'A' ,'C'), List('A', 'A', 'B', 'C'))
+definirManiobra(List(), List('A', 'A', 'B', 'C'))
+definirManiobra(List(1,2,3), List(1,3,2))
+definirManiobra(List(1,'a',2,'b'), List(2,'a',1,'b'))
